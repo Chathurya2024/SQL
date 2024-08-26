@@ -1,0 +1,6 @@
+# 1378 Replace Employee ID With The Unique Identifier
+# SOLUTION
+SELECT euni.unique_id, emp.name
+FROM Employees emp
+LEFT JOIN EmployeeUNI euni 
+ON emp.id = euni.id;

@@ -1,0 +1,16 @@
+# 1204 Last Person to Fit in the Bus
+
+SELECT T.name AS person_name
+FROM (
+    SELECT a.turn, a.person_id AS ID, a.person_name AS name, a.weight, SUM(b.weight) AS total_weights
+    FROM queue a
+    JOIN queue b
+    ON a.turn >= b.turn
+    GROUP BY a.turn, a.person_id, a.person_name, a.weight
+    HAVING total_weights <= 1000 
+    ORDER BY a.turn DESC
+    LIMIT 1
+) T;
+
+# STEP 1 - To extract the rows that have boarded the bus without exceeding the limit. We use GROUP BY and HAVING to filter 
+# STEP 2 - We then extract the person_name from the record

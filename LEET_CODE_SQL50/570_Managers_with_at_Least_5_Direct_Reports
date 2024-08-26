@@ -1,0 +1,8 @@
+# 570 Managers with at Least 5 Direct Reports
+# SOLUTION
+SELECT e.name
+FROM  employee e
+INNER JOIN employee b 
+ON e.id = b.managerId
+GROUP BY e.id
+HAVING count(e.id) >= 5;

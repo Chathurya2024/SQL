@@ -1,0 +1,6 @@
+# 610 Triangle Judgement
+
+# STEP 1 - Follow the conditions a+b>c, a+c>b, b+c>a. If all the conditions are true then it can be formed into a triangle.
+
+SELECT *, CASE WHEN x+y>z AND x+z>y AND y+z>x THEN "Yes" ELSE "No" END AS triangle
+FROM triangle 

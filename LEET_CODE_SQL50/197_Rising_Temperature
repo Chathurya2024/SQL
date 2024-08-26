@@ -1,0 +1,5 @@
+197 Rising Temperature
+# SOLUTION
+SELECT A.id AS ID 
+FROM weather A, weather B 
+WHERE DATEDIFF(A.recordDate, B.recordDate) = 1  AND A.temperature > B.temperature;

@@ -1,0 +1,23 @@
+# 185 Department Top Three Salaries
+
+SELECT
+    d.name AS Department,
+    e.name AS Employee,
+    e.salary AS Salary
+FROM
+    Employee e
+    JOIN Department d ON e.departmentId = d.id
+WHERE
+    (
+        SELECT COUNT(DISTINCT salary)
+        FROM Employee e2
+        WHERE e2.departmentId = e.departmentId AND e2.salary >= e.salary
+    ) <= 3
+ORDER BY
+    Department, Salary DESC;
+
+# STEP 1 - Join Employee (e) with Department (d) on matching departmentId to get department names.
+# STEP 2 - Use a subquery to count how many distinct salaries in the same department are greater than or equal to the current employee’s salary.
+# STEP 3 - Filter the results to include only the top 3 highest salaries per department.
+# STEP 4 - Select and display the department name, employee name, and salary.
+# STEP 5 - Order the results by department name and salary in descending order.

@@ -1,0 +1,30 @@
+# 1341 Movie Rating
+
+SELECT results FROM (
+    (SELECT u.name AS results
+    FROM users u
+    JOIN movierating mr ON u.user_id = mr.user_id
+    GROUP BY u.name
+    ORDER BY COUNT(mr.user_id) DESC, u.name ASC
+    LIMIT 1)
+    UNION ALL
+    (SELECT m.title AS results
+    FROM movies m
+    JOIN movierating mr ON m.movie_id = mr.movie_id
+    WHERE YEAR(mr.created_at) = 2020 AND MONTH(mr.created_at) = 2
+    GROUP BY m.title
+    ORDER BY AVG(mr.rating) DESC, m.title ASC
+    LIMIT 1)
+) AS combined_results;
+
+# STEP 1 - Select the user with the highest number of movie ratings:
+Step 1a: Join users (u) with movierating (mr) based on user_id.
+Step 1b: Group by u.name and order by the count of ratings in descending order, then by u.name in ascending order.
+Step 1c: Limit the result to the top 1 user.
+# STEP 2 - Select the top-rated movie for February 2020:
+Step 2a: Join movies (m) with movierating (mr) based on movie_id.
+Step 2b: Filter ratings to only those from February 2020.
+Step 2c: Group by m.title and order by the average rating in descending order, then by m.title in ascending order.
+Step 2d: Limit the result to the top 1 movie.
+# STEP 3 - Combine the results of Step 1 and Step 2 using UNION ALL.
+# STEP 4 - Alias the combined results as combined_results and select the results from this combined table.

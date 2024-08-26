@@ -1,0 +1,9 @@
+# 1075 Project Employees I
+SELECT p.project_id, round(sum(e.experience_years)/count(p.project_id),2) as average_years
+FROM project p
+LEFT JOIN employee e 
+ON e.employee_id = p.employee_id
+GROUP BY p.project_id
+
+# STEP 1 - Join tables and calculate Average Years
+# STEP 2 - Group by project_id and  Return project_id and the calculated average_years
