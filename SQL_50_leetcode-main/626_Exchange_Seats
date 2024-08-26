@@ -1,0 +1,30 @@
+# 626 Exchange Seats
+
+SELECT 
+    CASE 
+        WHEN MOD((SELECT COUNT(*) FROM seat), 2) = 1 THEN 
+            CASE 
+                WHEN mod(id - 1, 2) = 1 AND id <> (SELECT MAX(id) FROM seat) THEN id - 1
+                WHEN mod(id + 1, 2) = 0 AND id <> (SELECT MAX(id) FROM seat) THEN id + 1
+                ELSE id
+            END
+        ELSE 
+            CASE 
+                WHEN mod(id, 2) = 1 THEN id + 1
+                ELSE id - 1
+            END
+    END AS id , 
+    student
+FROM seat
+ORDER BY id ASC;
+
+# STEP 1 - Use a CASE statement to handle seat swapping based on whether the total number of seats is odd or even.
+# STEP 2 - If the number of seats is odd (MOD(COUNT(*), 2) = 1):
+Swap the id with the previous one (id - 1) for odd ids, unless it’s the maximum id.
+Swap the id with the next one (id + 1) for even ids, unless it’s the maximum id.
+Leave the id unchanged for the maximum id.
+# STEP 3 - If the number of seats is even:
+Swap the id with the next one (id + 1) for odd ids.
+Swap the id with the previous one (id - 1) for even ids.
+# STEP 4 - Select the id and student after applying the swapping logic.
+# STEP 5 - Order the results by the new id in ascending order.

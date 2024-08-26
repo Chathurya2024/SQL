@@ -1,0 +1,15 @@
+# 1907 Count Salary Categories
+
+SELECT categories.category, COUNT(T.account_id) AS accounts_count
+FROM (SELECT account_id, income, CASE WHEN income < 20000 THEN 'Low Salary' WHEN income BETWEEN 20000 AND 50000 THEN 'Average Salary' ELSE 'High Salary' END AS category FROM accounts) T
+RIGHT JOIN (SELECT 'Low Salary' AS category UNION ALL SELECT 'Average Salary' AS category UNION ALL SELECT 'High Salary' AS category
+) AS categories
+ON T.category = categories.category
+GROUP BY categories.category
+ORDER BY accounts_count DESC;
+
+# STEP 1 - Create a subquery T that categorizes each account_id based on income into 'Low Salary', 'Average Salary', or 'High Salary'.
+# STEP 2 - Create another subquery categories with all possible salary categories ('Low Salary', 'Average Salary', 'High Salary').
+# STEP 3 - Perform a RIGHT JOIN between T and categories to ensure all categories are included, even if no accounts fall into them.
+# STEP 4 - Group by category to count the number of accounts in each salary category.
+# STEP 5 - Order the results by accounts_count in descending order.
