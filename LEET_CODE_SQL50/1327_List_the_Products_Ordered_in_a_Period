@@ -1,9 +1,0 @@
-# 1327 List the Products Ordered in a Period
-
-SELECT p1.product_name, SUM(p2.unit) AS unit 
-FROM products p1
-JOIN orders p2
-ON p1.product_id = p2.product_id 
-WHERE MONTH(p2.order_date) = 2 AND YEAR(p2.order_date) = 2020
-GROUP BY p1.product_name 
-HAVING unit >= 100

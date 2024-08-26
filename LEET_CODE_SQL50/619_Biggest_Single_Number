@@ -1,7 +1,0 @@
-# 619 Biggest Single Number
-
-SELECT MAX(T.num) as num
-FROM (SELECT *
-FROM mynumbers
-GROUP BY num
-HAVING COUNT(num) = 1 ) T

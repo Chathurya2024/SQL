@@ -1,6 +1,0 @@
-# 1934. Confirmation Rate
-# SOLUTION
-SELECT distinct(s.user_id), round(sum(case when c.action = "confirmed" then 1 else 0 end) / count(*),2) as confirmation_rate
-FROM signups s
-LEFT JOIN confirmations c on s.user_id = c.user_id
-GROUP BY s.user_id;

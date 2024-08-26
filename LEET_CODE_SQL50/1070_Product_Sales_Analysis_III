@@ -1,9 +1,0 @@
-# 1070 Product Sales Analysis III
-
-SELECT s.product_id, frst.first_year, s.quantity, s.price
-FROM sales s
-LEFT JOIN 
-(SELECT product_id, MIN(year) as first_year
-FROM sales
-GROUP BY product_id) frst
-ON s.product_id = frst.product_id
